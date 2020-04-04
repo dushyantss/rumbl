@@ -46,7 +46,7 @@ defmodule Rumbl.Accounts do
     user = get_user_by(username: username)
 
     cond do
-      user && Pbkdf2.check_pass(user, given_pass) ->
+      user && Pbkdf2.verify_pass(given_pass, user.password_hash) ->
         {:ok, user}
 
       user ->
